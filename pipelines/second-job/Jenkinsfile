@@ -2,7 +2,7 @@ properties([parameters([string(defaultValue: '', description: '', name: 'PARAM',
 
 node('nodejs') {
     stage('pull scm') {
-        //git poll: true, url: 'https://github.com/fnikolov/project-y/'
+        git poll: true, url: 'https://github.com/fnikolov/project-y/'
     }
 
     stage('run app') {
