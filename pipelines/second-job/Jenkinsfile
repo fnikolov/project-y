@@ -3,6 +3,6 @@ properties([parameters([string(defaultValue: '', description: '', name: 'PARAM',
 node('nodejs') {
     stage('run app') {
         echo PARAM
-        sh "nodejs -p "const envOne = process.env.PARAM; console.log("envOne: " + PARAM);""
+        sh "nodejs app.js"
     }
 }
