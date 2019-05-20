@@ -3,18 +3,19 @@ import java.text.SimpleDateFormat
 
 node {
     stage('Set date') {
-        def weekday = new SimpleDateFormat("E") // the day of the week abbreviated
-        def yearWeek = new SimpleDateFormat("yyyy/w")
+        def weekdayName = new SimpleDateFormat("E") // the day of the week abbreviated
+        def yearWeek = new SimpleDateFormat("yyyy/w") // year/week
+        
+        def today = new Date()
+        def previousDate = today - 7
 
-        def now = new Date()
-        def previousDate = now.previous()
-        def date = (weekday.format(now))
-
-        if(date == 'Mon') {
-            echo "Today is ${date}"
+        def weekday = (weekdayName.format(today))
+        
+        if(weekday == 'Mon') { 
+            echo "Today is ${weekday}" 
             currentDate = (yearWeek.format(previousDate)) // Previous week yyyy/w
-        } else{
-            currentDate = (yearWeek.format(now))
+        } else{ 
+            currentDate = (yearWeek.format(today))
             echo 'Today is not Monday'
         }
         echo currentDate
