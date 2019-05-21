@@ -28,8 +28,6 @@ Weekend project
 ### Install docker 
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-mkdir /var/jenkins_home
-sudo chown 1000 /var/jenkins_home/
 
 
 ### Enable Docker remote API (TCP socket)
@@ -43,13 +41,15 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker.service
 
 ### Start Jenkins Master
+mkdir /var/jenkins_home
+sudo chown 1000 /var/jenkins_home/
 sudo docker run -d --restart unless-stopped -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home --name jenkins-master jenkins/jenkins
 
 
 ### Build JNLP Docker image with NodeJS
 Image registry: https://hub.docker.com/r/fnikolov/jnlp-slave-nodejs/dockerfile
 docker image build -t fnikolov/jnlp-slave-nodejs .
-docker push fnikolov/jnlp-slave-nodejs:tagname
+docker push fnikolov/jnlp-slave-nodejs:latest
 
 ### Connfigure Jenkins Docker plugin.
 As per the screenshots.
